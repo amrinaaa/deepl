@@ -23,7 +23,7 @@ Penelitian ini bertujuan untuk mengimplementasikan model speaker recognition ber
 
 [3]: https://www.isca-archive.org/ffsvc_2022/zheng22_ffsvc.pdf
 
-[4]: https://arxiv.org/abs/2109.00537
+[4]: https://arxiv.org/pdf/2109.00537
 
 [5]: https://musaelab.ca/pdfs/C73.pdf
 
@@ -45,3 +45,22 @@ xxx
 xxx
 
 ## **Daftar Pustaka**
+Avila, Anderson R., et al. “Improving the Performance of Far-Field Speaker Verification Using Multi-Condition Training: The Case of GMM-UBM and i-vector Systems.” https://musaelab.ca/pdfs/C73.pdf. Accessed 14 Mei 2025.
+
+Displanques, Brecht, et al. “ECAPA-TDNN: Emphasized Channel Attention, Propagation and Aggregation in TDNN Based Speaker Verification.” INTERSPEECH 2020, 2020, pp. 3830-3834, https://www.isca-archive.org/interspeech_2020/desplanques20_interspeech.pdf. Accessed 14 Mei 2025.
+
+Kanagasundaram, Ahlian, et al. “i-vector Based Speaker Recognition on Short Utterances.” INTERSPEECH 2011, 2011, pp. 2341-2344, researchgate.net/publication/230643046_i-vector_Based_Speaker_Recognition_on_Short_Utterances. Accessed 14 Mei 2025.
+
+Kanagasurandaram, A., et al. “A Study of X-vector Based Speaker Recognition on Short Utterances.” INTERSPEECH 2019, 2019, pp. 1943-1947, https://www.isca-archive.org/interspeech_2019/kanagasundaram19_interspeech.pdf. Accessed 14 Mei 2025.
+
+Loweimi, Erfan, et al. “On the Usefulness of Speaker Embeddings for Speaker Retrieval in the Wild: A Comparative Study of x-vector and ECAPA-TDNN Models.” INTERSPEECH 2024, 2024, pp. 3774-3778, https://www.isca-archive.org/interspeech_2024/loweimi24_interspeech.pdf. Accessed 14 Mei 2025.
+
+S. Furui. “Cepstral analysis technique for automatic speaker verification.” IEEE Transactions on Acoustics, Speech, and Signal Processing, vol. 29, no. 2, 1981, pp. 254-272, https://ieeexplore.ieee.org/document/1163530. Accessed 14 Mei 2025.
+
+Sharma, Raksha, et al. “Speaker Verification Market.” DATAINELO, https://dataintelo.com/, https://dataintelo.com/report/global-speaker-verification-market. Accessed 14 Mei 2025.
+
+Yamagishi, Junichi, et al. “ASVspoof 2021: accelerating progress in spoofed and deepfake speech detection.” arxiv.org/pdf/2109.00537. Accessed 14 Mei 2025.
+
+Yao, Jiadi, et al. “Branch-ECAPA-TDNN: A Parallel Branch Architecture to Capture Local and Global Features for Speaker Verification.” INTERSPEECH, 2023, pp. 1943-1947, https://www.isca-archive.org/interspeech_2023/yao23_interspeech.pdf. Accessed 14 Mei 2025.
+
+Zheng, Yu, et al. “The SpeakIn Speaker Verification System for Far-Field Speaker Verification Challenge 2022.” The 2022 Far-field Speaker Verification Challenge (FFSVC2022), 2022, pp. 15-19, https://www.isca-archive.org/ffsvc_2022/zheng22_ffsvc.pdf. Accessed 14 Mei 2025.
