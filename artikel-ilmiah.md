@@ -39,3 +39,9 @@ Penelitian ini bertujuan untuk mengimplementasikan model speaker recognition ber
 
 
 ## **Metode**
+xxx
+
+## **Metodologi**
+xxx
+
+## **Daftar Pustaka**
