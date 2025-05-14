@@ -1,3 +1,5 @@
+- Install ekstensi: Markdown+Math, Markdown Preview Enhanced, LaTeX Workshop
+
 // Heading
 # Heading 1
 ## Heading 2
@@ -79,3 +81,4 @@ Tabel
 | ------- | -------------------------- |
 | Data 1  | Data 2 Data 3|
 | Data 4  | Data 5 Data 6|
+

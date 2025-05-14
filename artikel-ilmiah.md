@@ -39,7 +39,87 @@ Penelitian ini bertujuan untuk mengimplementasikan model speaker recognition ber
 
 
 ## **Metode**
-xxx
+Arsitektur ECAPA-TDNN yang diimplementasikan memberi perhatian pada karakteristik pembicara yang tidak selalu aktif pada waktu yang sama. Dalam hal ini _Self-Attention_ digunakan untuk memperhatikan saluran yang relevan dan mengabaikan yang tidak relevan.
+
+Rumus untuk mekanisme self-attention:
+$$
+e_{t,c} = v_c^T f(W h_t + b) + k_c
+$$ (1)
+
+Dimana:
+
+- \( h_t \) adalah aktivasi pada frame ke-\( t \),
+- \( W \) dan \( b \) adalah parameter yang digunakan untuk memproyeksikan informasi ke ruang berdimensi lebih kecil,
+- \( v_c \) adalah vektor yang digunakan untuk menghitung perhatian pada saluran ke-\( c \),
+- \( k_c \) adalah bias untuk saluran ke-\( c \).
+
+Kemudian, skor perhatian
+e_{t,c} dinormalisasi dengan softmax untuk mendapatkan pentingnya setiap frame pada saluran tersebut:
+$$
+\alpha_{t,c} = \frac{\exp(e_{t,c})}{\sum_{\tau=1}^{T} \exp(e_{\tau,c})}
+$$ (2)
+
+Dimana 
+𝛼_{𝑡,𝑐} adalah skor perhatian yang menunjukkan pentingnya setiap frame untuk saluran ke-c.
+
+Selanjutnya, statistik berbobot dihitung dengan menggunakan skor perhatian 𝛼_{𝑡,𝑐} untuk mendapatkan rata-rata tertimbang dan deviasi standar tertimbang untuk setiap saluran:
+
+Rata-rata tertimbang saluran ke-c :
+$$
+\tilde{\mu}_c = \sum_{t=1}^{T} \alpha_{t,c} h_{t,c}
+$$ (3)
+
+Deviasi standar tertimbang saluran ke-c :
+$$
+\tilde{\sigma}_c = \sqrt{\sum_{t=1}^{T} \alpha_{t,c} (h_{t,c}^2 - \tilde{\mu}_c^2)}
+$$ (4)
+
+Output dari pooling layer adalah gabungan dari rata-rata tertimbang dan deviasi standar untuk semua saluran.
+
+Penggunaan Squeeze-Excitation (SE) Blocks untuk merescaling fitur frame-level berdasarkan konteks global dari rekaman. Langkah pertama dalam SE-block adalah operasi squeeze, yang menghitung deskriptor untuk setiap saluran dengan mengambil rata-rata fitur sepanjang waktu:
+$$
+z = \frac{1}{T} \sum_{t=1}^{T} h_t
+$$ (5)
+
+Deskriptor 𝑧 ini kemudian digunakan untuk operasi excitation, yang menghitung bobot untuk setiap saluran:
+
+$$
+s = \sigma(W_2 f(W_1 z + b_1) + b_2)
+$$ (6)
+
+Dimana:
+
+- \( W_1 \) dan \( W_2 \) adalah matriks berat untuk lapisan bottleneck,
+- \( f \) adalah fungsi non-linearitas (biasanya ReLU),
+- \( \sigma \) adalah fungsi sigmoid yang menghasilkan vektor bobot \( s \) antara 0 dan 1.
+
+Bobot 𝑠 yang dihasilkan dari proses Squeeze-Excitation (SE) diterapkan ke fitur saluran h_c melalui perkalian saluran-wise:
+
+$$
+\tilde{h}_c = s_c h_c
+$$ (7)
+
+
+
+Output dari seluruh SE-Res2Block dikombinasikan melalui proses Multi-layer Feature Aggregation (MFA), yaitu dengan menggabungkan (concatenate) semua peta fitur dari tiap SE-Res2Block Gambaran umum keseluruhan arsitektur ditunjukkan pada gambar 1 dibawah : 
+
+<div style="display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center;">
+  <img src="./gambar/cdnn-arsitektur.png" alt="Gambar Arsitektur ECAPA-TDNN" style="max-width: 100%; height: auto;">
+  <p>Gambar 1. Arsitektur ECAPA-TDNN (Sumber: Desplanques dkk, 2020) </p>
+</div>
+
+Fitur input yang digunakan dalam model ini memiliki dimensi 80 kolom dan T baris, di mana T merujuk pada panjang waktu atau urutan data yang dapat bervariasi. Langkah pertama adalah penerapan lapisan konvolusi 1D dengan ukuran kernel 5 dan langkah (stride) 1 pada input. Setelah proses konvolusi, fungsi aktivasi ReLU digunakan untuk memberikan non-linearitas pada data, diikuti dengan penerapan Batch Normalization (BN) untuk menstabilkan data dan mempercepat proses pelatihan.
+
+Model ini selanjutnya menggunakan dua lapisan **SE-Res2Block** dengan kernel ukuran 3 dan langkah yang berbeda (d=2 dan d=3). Blok residual ini menggunakan teknik **Squeeze-and-Excitation (SE)** untuk meningkatkan pemahaman terhadap fitur penting dalam data. Proses konvolusi dengan ukuran kernel 3 dan langkah yang berbeda ini secara bertahap mengurangi dimensi data sepanjang perjalanan model.
+
+Setelah itu, lapisan **Conv1D + ReLU (k=1, d=1)** diterapkan, di mana konvolusi 1D dengan ukuran kernel 1 dan langkah 1 digunakan untuk mereduksi dimensi fitur lebih lanjut, memungkinkan model untuk mempelajari fitur-fitur penting dengan lebih mendalam.
+
+Kemudian, **Attentive Stat Pooling** diterapkan untuk menggabungkan fitur berdasarkan perhatian, memberikan bobot lebih pada fitur yang lebih relevan. Di sini juga digunakan Batch Normalization untuk memastikan distribusi data tetap stabil selama pelatihan.
+
+Model ini dilanjutkan dengan lapisan **Fully Connected (FC)** yang menghasilkan output dari fitur yang telah diproses, diikuti dengan Batch Normalization untuk meningkatkan stabilitas dan kualitas pelatihan. Setelah itu, digunakan teknik **AAM-Softmax** untuk klasifikasi, yang memodelkan distribusi kelas dalam ruang fitur untuk menghasilkan prediksi kelas yang lebih akurat.
+
+Output akhir model berupa vektor berukuran **S × 1**, yang berisi hasil prediksi dari model, baik untuk klasifikasi maupun regresi. Model ini menggabungkan berbagai teknik untuk memproses data urutan dan menghasilkan output yang tepat sesuai dengan tugas yang diinginkan.
+
 
 ## **Metodologi**
 xxx
@@ -47,7 +127,7 @@ xxx
 ## **Daftar Pustaka**
 Avila, Anderson R., et al. “Improving the Performance of Far-Field Speaker Verification Using Multi-Condition Training: The Case of GMM-UBM and i-vector Systems.” https://musaelab.ca/pdfs/C73.pdf. Accessed 14 Mei 2025.
 
-Displanques, Brecht, et al. “ECAPA-TDNN: Emphasized Channel Attention, Propagation and Aggregation in TDNN Based Speaker Verification.” INTERSPEECH 2020, 2020, pp. 3830-3834, https://www.isca-archive.org/interspeech_2020/desplanques20_interspeech.pdf. Accessed 14 Mei 2025.
+Desplanques, Brecht, et al. “ECAPA-TDNN: Emphasized Channel Attention, Propagation and Aggregation in TDNN Based Speaker Verification.” INTERSPEECH 2020, 2020, pp. 3830-3834, https://www.isca-archive.org/interspeech_2020/desplanques20_interspeech.pdf. Accessed 14 Mei 2025.
 
 Kanagasundaram, Ahlian, et al. “i-vector Based Speaker Recognition on Short Utterances.” INTERSPEECH 2011, 2011, pp. 2341-2344, researchgate.net/publication/230643046_i-vector_Based_Speaker_Recognition_on_Short_Utterances. Accessed 14 Mei 2025.
 
