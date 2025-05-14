@@ -116,6 +116,23 @@ Output akhir model berupa vektor berukuran **S × 1**, yang berisi hasil prediks
 ## **Metodologi**
 ### 1. Dataset dan Subset Pelatihan
 Penelitian ini menggunakan dataset publik VoxCeleb1 yang terdiri dari ribuan rekaman suara dari berbagai pembicara. Dataset ini dipilih karena memiliki variasi kondisi akustik yang representatif terhadap penggunaan di dunia nyata. Namun, karena keterbatasan sumber daya komputasi, hanya 10% dari total dataset VoxCeleb1 yang digunakan sebagai data pelatihan. Subset tersebut diambil secara acak untuk memastikan distribusi seimbang.
+Contoh subset yang digunakan antara lain:
+
+```
+PaddleAudio\speaker-verification\data\voxceleb\id10002\0_laIeN-Q44\00001.wav
+PaddleAudio\speaker-verification\data\voxceleb\id10002\6WO410QOeuo\00001.wav
+PaddleAudio\speaker-verification\data\voxceleb\id10002\6WO410QOeuo\00002.wav
+PaddleAudio\speaker-verification\data\voxceleb\id10002\6WO410QOeuo\00003.wav
+PaddleAudio\speaker-verification\data\voxceleb\id10002\6WO410QOeuo\00004.wav
+PaddleAudio\speaker-verification\data\voxceleb\id10002\6WO410QOeuo\00005.wav
+PaddleAudio\speaker-verification\data\voxceleb\id10002\6WO410QOeuo\00006.wav
+PaddleAudio\speaker-verification\data\voxceleb\id10002\6WO410QOeuo\00007.wav
+PaddleAudio\speaker-verification\data\voxceleb\id10002\6WO410QOeuo\00008.wav
+PaddleAudio\speaker-verification\data\voxceleb\id10002\6WO410QOeuo\00009.wav
+PaddleAudio\speaker-verification\data\voxceleb\id10002\6WO410QOeuo\00010.wav
+...
+```
+
 ### 2.Diagram Alir 
 <div style="display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center;">
   <img src="https://i.imgur.com/3R6wOPf.png" alt="Arsitektur ECAPA-TDNN" style="max-width: 30%; height: auto;" />
