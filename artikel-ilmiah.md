@@ -153,6 +153,8 @@ Kanagasundaram, Ahlian, et al. “i-vector Based Speaker Recognition on Short Ut
 
 Kanagasurandaram, A., et al. “A Study of X-vector Based Speaker Recognition on Short Utterances.” INTERSPEECH 2019, 2019, pp. 1943-1947, https://www.isca-archive.org/interspeech_2019/kanagasundaram19_interspeech.pdf. Accessed 14 Mei 2025.
 
+Li, Pinyan, et al. “Enhancing Speaker Recognition with CRET Model: a fusion of CONV2D, RESNET and ECAPA-TDNN.” EURASIP Journal on Audio, Speech, and Music Processing, no. 9, 2025, asmp-eurasipjournals.springeropen.com/articles/10.1186/s13636-025-00396-4. Accessed 14 Mei 2025.
+
 Loweimi, Erfan, et al. “On the Usefulness of Speaker Embeddings for Speaker Retrieval in the Wild: A Comparative Study of x-vector and ECAPA-TDNN Models.” INTERSPEECH 2024, 2024, pp. 3774-3778, https://www.isca-archive.org/interspeech_2024/loweimi24_interspeech.pdf. Accessed 14 Mei 2025.
 
 S. Furui. “Cepstral analysis technique for automatic speaker verification.” IEEE Transactions on Acoustics, Speech, and Signal Processing, vol. 29, no. 2, 1981, pp. 254-272, https://ieeexplore.ieee.org/document/1163530. Accessed 14 Mei 2025.
