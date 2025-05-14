@@ -114,7 +114,83 @@ Model ini dilanjutkan dengan lapisan **Fully Connected (FC)** yang menghasilkan 
 Output akhir model berupa vektor berukuran **S × 1**, yang berisi hasil prediksi dari model, baik untuk klasifikasi maupun regresi. Model ini menggabungkan berbagai teknik untuk memproses data urutan dan menghasilkan output yang tepat sesuai dengan tugas yang diinginkan.
 
 ## **Metodologi**
-xxx
+### 1. Dataset dan Subset Pelatihan
+Penelitian ini menggunakan dataset publik VoxCeleb1 yang terdiri dari ribuan rekaman suara dari berbagai pembicara. Dataset ini dipilih karena memiliki variasi kondisi akustik yang representatif terhadap penggunaan di dunia nyata. Namun, karena keterbatasan sumber daya komputasi, hanya 10% dari total dataset VoxCeleb1 yang digunakan sebagai data pelatihan. Subset tersebut diambil secara acak untuk memastikan distribusi seimbang.
+### 2.Diagram Alir 
+<div style="display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center;">
+  <img src="https://i.imgur.com/3R6wOPf.png" alt="Arsitektur ECAPA-TDNN" style="max-width: 30%; height: auto;" />
+  <p>Gambar 10. Diagram Alir Metodologi</p>
+</div>
+
+Diagram alir di atas menggambarkan tahapan dalam proses implementasi sistem verifikasi pembicara menggunakan model ECAPA-TDNN. Berikut merupakan detail dari setiap langkah:
+
+#### Input Data
+Dataset suara dimuat dalam format WAV mono dengan sample rate 16 kHz. Hanya 10% dari data digunakan dalam pelatihan.
+
+#### Feature Extraction
+Ekstraksi fitur menggunakan filter bank Mel-spectrogram 80 dimensi untuk mendapatkan representasi numerik sinyal audio.
+
+#### Data Augmentation
+Augmentasi dilakukan secara terbatas (tanpa RIR/MUSAN), dengan masking waktu dan frekuensi sebagai alternatif peningkatan keragaman data.
+
+#### Evaluation
+Metrik evaluasi yang direncanakan adalah Equal Error Rate (EER) dan Top-1 Accuracy, meskipun tahap evaluasi belum dilakukan saat ini.
+
+#### Output
+Model menghasilkan speaker embedding sebagai representasi identitas pembicara untuk proses verifikasi atau klasifikasi lebih lanjut.
+
+
+
+### 3.Konfigurasi Ekstraksi Fitur
+- Sample rate: 16,000 Hz
+- Jumlah mel filterbank: 80
+- Window size: 25ms (400 sampel)
+- Hop length: 10ms (160 sampel)
+- Window type: Hann
+- F_min / F_max: 20 – 7600 Hz
+
+### 4. Augmentasi Data
+Augmentasi dilakukan secara terbatas karena model segmentasi yang diperlukan (RIR dan MUSAN) belum dapat diakses.
+Adapun parameter konfiruasi yang kami lakukan adalah sebagai berikut
+```yaml
+augment_with_sox: False
+augment_wav: True
+rir_path: ""
+muse_noise: ""
+muse_music: ""
+```
+
+Augmentasi tambahan seperti time masking dan frequency masking juga diterapkan
+
+```Yaml
+max_time_mask: 2
+max_freq_mask: 1
+max_time_mask_width: 20
+max_freq_mask_width: 10
+```
+
+### 5. Konfigurasi Pelatihan Model
+- Model: ECAPA-TDNN
+- Optimizer: Adam
+- Learning rate: base 1e-4, max 1e-5 dengan reverse_lr
+- Epoch: 500
+- Batch size: 64
+- Loss function: Additive Angular Margin (AAM-Softmax)
+- Feature dimensi: 192
+- Jumlah kelas (n_classes): 22,506
+
+### 6. Rencana Evaluasi
+Evaluasi akan dilakukan dengan mempertimbangkan 2 metrik utama:
+- Equal Error Rate (EER) – Mengukur keseimbangan antara false accept dan f= false reject
+- Top-1 Accuracy – Mengukur akurasi klasifikasi identitas pembicara yang paling mungkin
+
+
+
+
+<!-- pagebreak -->
+
+
+
 
 ## **Daftar Pustaka**
 Avila, Anderson R., et al. “Improving the Performance of Far-Field Speaker Verification Using Multi-Condition Training: The Case of GMM-UBM and i-vector Systems.” https://musaelab.ca/pdfs/C73.pdf. Accessed 14 Mei 2025.
