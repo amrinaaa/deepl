@@ -115,7 +115,9 @@ Output akhir model berupa vektor berukuran **S × 1**, yang berisi hasil prediks
 
 ## **Metodologi**
 ### 1. Dataset dan Subset Pelatihan
-Penelitian ini menggunakan dataset publik VoxCeleb1 yang terdiri dari ribuan rekaman suara dari berbagai pembicara. Dataset ini dipilih karena memiliki variasi kondisi akustik yang representatif terhadap penggunaan di dunia nyata. Namun, karena keterbatasan sumber daya komputasi, hanya 10% dari total dataset VoxCeleb1 yang digunakan sebagai data pelatihan. Subset tersebut diambil secara acak untuk memastikan distribusi seimbang.
+Penelitian ini menggunakan dataset publik VoxCeleb1, yang terdiri dari lebih dari 153.516 klip audio dari 1.251 pembicara, dengan durasi total sekitar 352 jam. Dataset ini dipilih karena mencakup berbagai variasi kondisi akustik, latar belakang suara, dan gaya bicara yang representatif terhadap situasi dunia nyata.
+
+Namun, karena keterbatasan sumber daya komputasi, hanya 10% dari keseluruhan data yang digunakan sebagai data pelatihan. Subset ini mencakup sekitar 121 pembicara, yang dipilih secara acak dan proporsional, guna menjaga keragaman identitas suara.
 Contoh subset yang digunakan antara lain:
 
 ```
