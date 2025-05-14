@@ -117,7 +117,7 @@ Output dari seluruh SE-Res2Block dikombinasikan melalui proses Multi-layer Featu
 
 <div style="display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center;">
   <img src="https://i.imgur.com/OZG2n6U.jpeg" alt="Arsitektur ECAPA-TDNN" style="max-width: 100%; height: auto;" />
-  <p>Gambar 1. Arsitektur ECAPA-TDNN (Sumber: Desplanques dkk, 2020) </p>
+  <p>Gambar 8. Arsitektur ECAPA-TDNN (Sumber: Desplanques dkk, 2020) </p>
 </div>
 
 Fitur input yang digunakan dalam model ini memiliki dimensi 80 kolom dan T baris, di mana T merujuk pada panjang waktu atau urutan data yang dapat bervariasi. Langkah pertama adalah penerapan lapisan konvolusi 1D dengan ukuran kernel 5 dan langkah (stride) 1 pada input. Setelah proses konvolusi, fungsi aktivasi ReLU digunakan untuk memberikan non-linearitas pada data, diikuti dengan penerapan Batch Normalization (BN) untuk menstabilkan data dan mempercepat proses pelatihan.
