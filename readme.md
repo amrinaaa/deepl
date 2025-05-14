@@ -1,1 +1,1 @@
-- Install ekstensi: Markdown+Math, Markdown Preview Enhanced, LaTeX Workshop
+- Install ekstensi: Markdown Preview Enhanced

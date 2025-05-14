@@ -42,7 +42,7 @@ Penelitian ini bertujuan untuk mengimplementasikan model speaker recognition ber
 Arsitektur ECAPA-TDNN yang diimplementasikan, diadopsi dari penelitian oleh [(Desplanques dkk, 2020)][6]. Arsitektur memberi perhatian pada karakteristik pembicara yang tidak selalu aktif pada waktu yang sama. Dalam hal ini _Self-Attention_ digunakan untuk memperhatikan saluran yang relevan dan mengabaikan yang tidak relevan.
 
 <div style="display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center;">
-  <img src="https://i.imgur.com/B0D9Vu3.png" alt="Arsitektur ECAPA-TDNN" style="max-width: 100%; height: auto;" />
+  <img src="https://i.imgur.com/B0D9Vu3.png" alt="Rumus Self Attention" style="max-width: 100%; height: auto;" />
   <p>Gambar 1. Rumus Mekanisme <em>Self Attention</em></p>
 </div>
 
@@ -55,9 +55,11 @@ Dimana:
 
 Kemudian, skor perhatian
 e_{t,c} dinormalisasi dengan softmax untuk mendapatkan pentingnya setiap frame pada saluran tersebut:
-$$
-\alpha_{t,c} = \frac{\exp(e_{t,c})}{\sum_{\tau=1}^{T} \exp(e_{\tau,c})}
-$$ (2)
+
+<div style="display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center;">
+  <img src="https://i.imgur.com/jPpCM1c.png" alt="Fungsi Softmax " style="max-width: 100%; height: auto;" />
+  <p>Gambar 2. Rumus Fungsi <em>Softmax</em></p>
+</div>
 
 Dimana 
 𝛼_{𝑡,𝑐} adalah skor perhatian yang menunjukkan pentingnya setiap frame untuk saluran ke-c.
@@ -65,39 +67,50 @@ Dimana
 Selanjutnya, statistik berbobot dihitung dengan menggunakan skor perhatian 𝛼_{𝑡,𝑐} untuk mendapatkan rata-rata tertimbang dan deviasi standar tertimbang untuk setiap saluran:
 
 Rata-rata tertimbang saluran ke-c :
-$$
-\tilde{\mu}_c = \sum_{t=1}^{T} \alpha_{t,c} h_{t,c}
-$$ (3)
+
+<div style="display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center;">
+  <img src="https://i.imgur.com/iMV6BeO.png" alt="Rumus Rata-Rata Tertimbang " style="max-width: 100%; height: auto;" />
+  <p>Gambar 3. Rumus Rata-Rata Tertimbang</p>
+</div>
 
 Deviasi standar tertimbang saluran ke-c :
-$$
-\tilde{\sigma}_c = \sqrt{\sum_{t=1}^{T} \alpha_{t,c} (h_{t,c}^2 - \tilde{\mu}_c^2)}
-$$ (4)
+
+<div style="display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center;">
+  <img src="https://i.imgur.com/1IaAUC6.png" alt="Rumus Standar Deviasi " style="max-width: 100%; height: auto;" />
+  <p>Gambar 4. Rumus Standar Deviasi Tertimbang</p>
+</div>
 
 Output dari pooling layer adalah gabungan dari rata-rata tertimbang dan deviasi standar untuk semua saluran.
 
 Penggunaan Squeeze-Excitation (SE) Blocks untuk merescaling fitur frame-level berdasarkan konteks global dari rekaman. Langkah pertama dalam SE-block adalah operasi squeeze, yang menghitung deskriptor untuk setiap saluran dengan mengambil rata-rata fitur sepanjang waktu:
-$$
-z = \frac{1}{T} \sum_{t=1}^{T} h_t
-$$ (5)
+
+<div style="display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center;">
+  <img src="https://i.imgur.com/4fvldMD.png" alt="Rumus Rata-Rata Fitur " style="max-width: 100%; height: auto;" />
+  <p>Gambar 5. Rumus Rata-Rata Fitur</p>
+</div>
 
 Deskriptor 𝑧 ini kemudian digunakan untuk operasi excitation, yang menghitung bobot untuk setiap saluran:
 
-$$
-s = \sigma(W_2 f(W_1 z + b_1) + b_2)
-$$ (6)
+<div style="display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center;">
+  <img src="https://i.imgur.com/y8JvFMG.png" alt="Rumus Menghitung Bobot Saluran " style="max-width: 100%; height: auto;" />
+  <p>Gambar 6. Rumus Menghitung Bobot Saluran</p>
+</div>
 
 Dimana:
-
 - \( W_1 \) dan \( W_2 \) adalah matriks berat untuk lapisan bottleneck,
 - \( f \) adalah fungsi non-linearitas (biasanya ReLU),
 - \( \sigma \) adalah fungsi sigmoid yang menghasilkan vektor bobot \( s \) antara 0 dan 1.
 
 Bobot 𝑠 yang dihasilkan dari proses Squeeze-Excitation (SE) diterapkan ke fitur saluran h_c melalui perkalian saluran-wise:
-
+<!-- 
 $$
 \tilde{h}_c = s_c h_c
-$$ (7)
+$$ (7) -->
+
+<div style="display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center;">
+  <img src="https://i.imgur.com/QIDqfBc.png" alt="Rumus Perkalian Saluran-Wise" style="max-width: 100%; height: auto;" />
+  <p>Gambar 7. Rumus  perkalian Saluran-Wise</p>
+</div>
 
 
 Output dari seluruh SE-Res2Block dikombinasikan melalui proses Multi-layer Feature Aggregation (MFA), yaitu dengan menggabungkan (concatenate) semua peta fitur dari tiap SE-Res2Block Gambaran umum keseluruhan arsitektur ditunjukkan pada gambar 1 dibawah : 
