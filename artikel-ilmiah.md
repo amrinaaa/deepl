@@ -103,7 +103,7 @@ $$ (7)
 Output dari seluruh SE-Res2Block dikombinasikan melalui proses Multi-layer Feature Aggregation (MFA), yaitu dengan menggabungkan (concatenate) semua peta fitur dari tiap SE-Res2Block Gambaran umum keseluruhan arsitektur ditunjukkan pada gambar 1 dibawah : 
 
 <div style="display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center;">
-  <img src="./gambar/cdnn-arsitektur.png" alt="Gambar Arsitektur ECAPA-TDNN" style="max-width: 100%; height: auto;">
+  <img src="https://i.imgur.com/OZG2n6U.jpeg" alt="Arsitektur ECAPA-TDNN" style="max-width: 100%; height: auto;" />
   <p>Gambar 1. Arsitektur ECAPA-TDNN (Sumber: Desplanques dkk, 2020) </p>
 </div>
 
