@@ -1,6 +1,6 @@
 # **Implementasi Arsitektur ECAPA-TDNN untuk Verifikasi Pembicara**
 
-### Penulis
+## **Penulis**
     Amrina Rossada*, Ardhi Iwantara Saputra*, Abellia Putri Dwi Masita*, Wiranto*, Alex Anandha Romadhona*, Reno Fahrezi Purnomo*
 
 ## **Pendahuluan**
