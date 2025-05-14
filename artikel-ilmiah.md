@@ -39,7 +39,7 @@ Penelitian ini bertujuan untuk mengimplementasikan model speaker recognition ber
 
 
 ## **Metode**
-Arsitektur ECAPA-TDNN yang diimplementasikan memberi perhatian pada karakteristik pembicara yang tidak selalu aktif pada waktu yang sama. Dalam hal ini _Self-Attention_ digunakan untuk memperhatikan saluran yang relevan dan mengabaikan yang tidak relevan.
+Arsitektur ECAPA-TDNN yang diimplementasikan, diadopsi dari penelitian oleh [(Desplanques dkk, 2020)][6]. Arsitektur memberi perhatian pada karakteristik pembicara yang tidak selalu aktif pada waktu yang sama. Dalam hal ini _Self-Attention_ digunakan untuk memperhatikan saluran yang relevan dan mengabaikan yang tidak relevan.
 
 Rumus untuk mekanisme self-attention:
 $$
@@ -100,7 +100,6 @@ $$
 $$ (7)
 
 
-
 Output dari seluruh SE-Res2Block dikombinasikan melalui proses Multi-layer Feature Aggregation (MFA), yaitu dengan menggabungkan (concatenate) semua peta fitur dari tiap SE-Res2Block Gambaran umum keseluruhan arsitektur ditunjukkan pada gambar 1 dibawah : 
 
 <div style="display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center;">
@@ -120,6 +119,8 @@ Model ini dilanjutkan dengan lapisan **Fully Connected (FC)** yang menghasilkan 
 
 Output akhir model berupa vektor berukuran **S × 1**, yang berisi hasil prediksi dari model, baik untuk klasifikasi maupun regresi. Model ini menggabungkan berbagai teknik untuk memproses data urutan dan menghasilkan output yang tepat sesuai dengan tugas yang diinginkan.
 
+
+[6]: https://www.isca-archive.org/interspeech_2020/desplanques20_interspeech.pdf 
 
 ## **Metodologi**
 xxx
