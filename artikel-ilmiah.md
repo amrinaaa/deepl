@@ -41,11 +41,12 @@ Penelitian ini bertujuan untuk mengimplementasikan model speaker recognition ber
 ## **Metode**
 Arsitektur ECAPA-TDNN yang diimplementasikan, diadopsi dari penelitian oleh [(Desplanques dkk, 2020)][6]. Arsitektur memberi perhatian pada karakteristik pembicara yang tidak selalu aktif pada waktu yang sama. Dalam hal ini _Self-Attention_ digunakan untuk memperhatikan saluran yang relevan dan mengabaikan yang tidak relevan.
 
-Rumus untuk mekanisme self-attention:
-<div style="display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center;">
-  <img src="./gambar/rumus-self-attention.png" alt="Gambar Arsitektur ECAPA-TDNN" style="max-width: 100%; height: auto;">
-  <p>Gambar 1. Rumus Self-Attention</p>
-</div>
+<p align="center">
+  <img src="./gambar/rumus-self-attention.png" alt="Gambar Arsitektur ECAPA-TDNN">
+</p>
+
+<p align="center">Gambar 1. Rumus Mekanisme <em>Self-Attention</em></p>
+
 
 <!-- $$
 e_{t,c} = v_c^T f(W h_t + b) + k_c
