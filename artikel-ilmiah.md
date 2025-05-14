@@ -37,9 +37,6 @@ Penelitian ini bertujuan untuk mengimplementasikan model speaker recognition ber
 
 [10]: https://www.isca-archive.org/interspeech_2024/loweimi24_interspeech.pdf 
 
-[11]: Li, Pinyan, et al. “Enhancing Speaker Recognition with CRET Model: a fusion of CONV2D, RESNET and ECAPA-TDNN.” EURASIP Journal on Audio, Speech, and Music Processing, no. 9, 2025, asmp-eurasipjournals.springeropen.com/articles/10.1186/s13636-025-00396-4. Accessed 14 Mei 2025.
-
-
 ## **Metode**
 Proses verifikasi suara dimulai dari input sinyal suara dari beberapa pembicara. Sinyal ini diproses dan diekstraksi fiturnya. Dalam mode pelatihan, fitur digunakan untuk membuat model suara yang disimpan di voiceprint database. Dalam mode pengujian, fitur dari suara baru dicocokkan dengan data yang ada. Hasil pencocokan menghasilkan skor yang digunakan untuk pengambilan keputusan, apakah suara tersebut diterima atau ditolak.
 
@@ -139,7 +136,6 @@ Output akhir model berupa vektor berukuran **S × 1**, yang berisi hasil prediks
 
 [6]: https://www.isca-archive.org/interspeech_2020/desplanques20_interspeech.pdf 
 
-[11]: Li, Pinyan, et al. “Enhancing Speaker Recognition with CRET Model: a fusion of CONV2D, RESNET and ECAPA-TDNN.” EURASIP Journal on Audio, Speech, and Music Processing, no. 9, 2025, asmp-eurasipjournals.springeropen.com/articles/10.1186/s13636-025-00396-4. Accessed 14 Mei 2025.
 
 ## **Metodologi**
 xxx
