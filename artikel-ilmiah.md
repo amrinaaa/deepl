@@ -37,13 +37,15 @@ Penelitian ini bertujuan untuk mengimplementasikan model speaker recognition ber
 
 [10]: https://www.isca-archive.org/interspeech_2024/loweimi24_interspeech.pdf 
 
+[11]: Li, Pinyan, et al. “Enhancing Speaker Recognition with CRET Model: a fusion of CONV2D, RESNET and ECAPA-TDNN.” EURASIP Journal on Audio, Speech, and Music Processing, no. 9, 2025, asmp-eurasipjournals.springeropen.com/articles/10.1186/s13636-025-00396-4. Accessed 14 Mei 2025.
+
 
 ## **Metode**
 Proses verifikasi suara dimulai dari input sinyal suara dari beberapa pembicara. Sinyal ini diproses dan diekstraksi fiturnya. Dalam mode pelatihan, fitur digunakan untuk membuat model suara yang disimpan di voiceprint database. Dalam mode pengujian, fitur dari suara baru dicocokkan dengan data yang ada. Hasil pencocokan menghasilkan skor yang digunakan untuk pengambilan keputusan, apakah suara tersebut diterima atau ditolak.
 
 <div style="display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center;">
   <img src="https://i.imgur.com/0vFtRod.jpeg" alt="Speaker Recognition" style="max-width: 100%; height: auto;" />
-  <p>Gambar 1. <em>Speaker Recognition</em></p>
+  <p>Gambar 1. <em>Speaker Recognition</em> (Sumber: Li dkk, 2025)</p>
 </div>
 
 Model arsitektur yang diimplementasikan adalah arsitektur ECAPA-TDNN. Arsitektur tersebut diadopsi dari penelitian oleh [(Desplanques dkk, 2020)][6]. Arsitektur memberi perhatian pada karakteristik pembicara yang tidak selalu aktif pada waktu yang sama. Dalam hal ini _Self-Attention_ digunakan untuk memperhatikan saluran yang relevan dan mengabaikan yang tidak relevan.
@@ -120,7 +122,7 @@ Output dari seluruh SE-Res2Block dikombinasikan melalui proses Multi-layer Featu
 
 <div style="display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center;">
   <img src="https://i.imgur.com/OZG2n6U.jpeg" alt="Arsitektur ECAPA-TDNN" style="max-width: 100%; height: auto;" />
-  <p>Gambar 9. Arsitektur ECAPA-TDNN (Sumber: Desplanques dkk, 2020) </p>
+  <p>Gambar 9. Arsitektur ECAPA-TDNN (Sumber: Desplanques dkk, 2020)</p>
 </div>
 
 Fitur input yang digunakan dalam model ini memiliki dimensi 80 kolom dan T baris, di mana T merujuk pada panjang waktu atau urutan data yang dapat bervariasi. Langkah pertama adalah penerapan lapisan konvolusi 1D dengan ukuran kernel 5 dan langkah (stride) 1 pada input. Setelah proses konvolusi, fungsi aktivasi ReLU digunakan untuk memberikan non-linearitas pada data, diikuti dengan penerapan Batch Normalization (BN) untuk menstabilkan data dan mempercepat proses pelatihan.
@@ -136,6 +138,8 @@ Model ini dilanjutkan dengan lapisan **Fully Connected (FC)** yang menghasilkan 
 Output akhir model berupa vektor berukuran **S × 1**, yang berisi hasil prediksi dari model, baik untuk klasifikasi maupun regresi. Model ini menggabungkan berbagai teknik untuk memproses data urutan dan menghasilkan output yang tepat sesuai dengan tugas yang diinginkan.
 
 [6]: https://www.isca-archive.org/interspeech_2020/desplanques20_interspeech.pdf 
+
+[11]: Li, Pinyan, et al. “Enhancing Speaker Recognition with CRET Model: a fusion of CONV2D, RESNET and ECAPA-TDNN.” EURASIP Journal on Audio, Speech, and Music Processing, no. 9, 2025, asmp-eurasipjournals.springeropen.com/articles/10.1186/s13636-025-00396-4. Accessed 14 Mei 2025.
 
 ## **Metodologi**
 xxx
