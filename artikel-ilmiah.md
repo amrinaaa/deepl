@@ -39,11 +39,18 @@ Penelitian ini bertujuan untuk mengimplementasikan model speaker recognition ber
 
 
 ## **Metode**
-Arsitektur ECAPA-TDNN yang diimplementasikan, diadopsi dari penelitian oleh [(Desplanques dkk, 2020)][6]. Arsitektur memberi perhatian pada karakteristik pembicara yang tidak selalu aktif pada waktu yang sama. Dalam hal ini _Self-Attention_ digunakan untuk memperhatikan saluran yang relevan dan mengabaikan yang tidak relevan.
+Proses verifikasi suara dimulai dari input sinyal suara dari beberapa pembicara. Sinyal ini diproses dan diekstraksi fiturnya. Dalam mode pelatihan, fitur digunakan untuk membuat model suara yang disimpan di voiceprint database. Dalam mode pengujian, fitur dari suara baru dicocokkan dengan data yang ada. Hasil pencocokan menghasilkan skor yang digunakan untuk pengambilan keputusan, apakah suara tersebut diterima atau ditolak.
+
+<div style="display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center;">
+  <img src="https://i.imgur.com/0vFtRod.jpeg" alt="Speaker Recognition" style="max-width: 100%; height: auto;" />
+  <p>Gambar 1. <em>Speaker Recognition</em></p>
+</div>
+
+Model arsitektur yang diimplementasikan adalah arsitektur ECAPA-TDNN. Arsitektur tersebut diadopsi dari penelitian oleh [(Desplanques dkk, 2020)][6]. Arsitektur memberi perhatian pada karakteristik pembicara yang tidak selalu aktif pada waktu yang sama. Dalam hal ini _Self-Attention_ digunakan untuk memperhatikan saluran yang relevan dan mengabaikan yang tidak relevan.
 
 <div style="display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center;">
   <img src="https://i.imgur.com/B0D9Vu3.png" alt="Rumus Self Attention" style="max-width: 100%; height: auto;" />
-  <p>Gambar 1. Rumus Mekanisme <em>Self Attention</em></p>
+  <p>Gambar 2. Rumus Mekanisme <em>Self Attention</em></p>
 </div>
 
 Dimana:
@@ -58,7 +65,7 @@ e_{t,c} dinormalisasi dengan softmax untuk mendapatkan pentingnya setiap frame p
 
 <div style="display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center;">
   <img src="https://i.imgur.com/jPpCM1c.png" alt="Fungsi Softmax " style="max-width: 100%; height: auto;" />
-  <p>Gambar 2. Rumus Fungsi <em>Softmax</em></p>
+  <p>Gambar 3. Rumus Fungsi <em>Softmax</em></p>
 </div>
 
 Dimana 
@@ -70,14 +77,14 @@ Rata-rata tertimbang saluran ke-c :
 
 <div style="display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center;">
   <img src="https://i.imgur.com/iMV6BeO.png" alt="Rumus Rata-Rata Tertimbang " style="max-width: 100%; height: auto;" />
-  <p>Gambar 3. Rumus Rata-Rata Tertimbang</p>
+  <p>Gambar 4. Rumus Rata-Rata Tertimbang</p>
 </div>
 
 Deviasi standar tertimbang saluran ke-c :
 
 <div style="display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center;">
   <img src="https://i.imgur.com/1IaAUC6.png" alt="Rumus Standar Deviasi " style="max-width: 100%; height: auto;" />
-  <p>Gambar 4. Rumus Standar Deviasi Tertimbang</p>
+  <p>Gambar 5. Rumus Standar Deviasi Tertimbang</p>
 </div>
 
 Output dari pooling layer adalah gabungan dari rata-rata tertimbang dan deviasi standar untuk semua saluran.
@@ -86,14 +93,14 @@ Penggunaan Squeeze-Excitation (SE) Blocks untuk merescaling fitur frame-level be
 
 <div style="display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center;">
   <img src="https://i.imgur.com/4fvldMD.png" alt="Rumus Rata-Rata Fitur " style="max-width: 100%; height: auto;" />
-  <p>Gambar 5. Rumus Rata-Rata Fitur</p>
+  <p>Gambar 6. Rumus Rata-Rata Fitur</p>
 </div>
 
 Deskriptor 𝑧 ini kemudian digunakan untuk operasi excitation, yang menghitung bobot untuk setiap saluran:
 
 <div style="display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center;">
   <img src="https://i.imgur.com/y8JvFMG.png" alt="Rumus Menghitung Bobot Saluran " style="max-width: 100%; height: auto;" />
-  <p>Gambar 6. Rumus Menghitung Bobot Saluran</p>
+  <p>Gambar 7. Rumus Menghitung Bobot Saluran</p>
 </div>
 
 Dimana:
@@ -102,14 +109,10 @@ Dimana:
 - \( \sigma \) adalah fungsi sigmoid yang menghasilkan vektor bobot \( s \) antara 0 dan 1.
 
 Bobot 𝑠 yang dihasilkan dari proses Squeeze-Excitation (SE) diterapkan ke fitur saluran h_c melalui perkalian saluran-wise:
-<!-- 
-$$
-\tilde{h}_c = s_c h_c
-$$ (7) -->
 
 <div style="display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center;">
   <img src="https://i.imgur.com/QIDqfBc.png" alt="Rumus Perkalian Saluran-Wise" style="max-width: 100%; height: auto;" />
-  <p>Gambar 7. Rumus  perkalian Saluran-Wise</p>
+  <p>Gambar 8. Rumus  perkalian Saluran-Wise</p>
 </div>
 
 
@@ -117,7 +120,7 @@ Output dari seluruh SE-Res2Block dikombinasikan melalui proses Multi-layer Featu
 
 <div style="display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center;">
   <img src="https://i.imgur.com/OZG2n6U.jpeg" alt="Arsitektur ECAPA-TDNN" style="max-width: 100%; height: auto;" />
-  <p>Gambar 8. Arsitektur ECAPA-TDNN (Sumber: Desplanques dkk, 2020) </p>
+  <p>Gambar 9. Arsitektur ECAPA-TDNN (Sumber: Desplanques dkk, 2020) </p>
 </div>
 
 Fitur input yang digunakan dalam model ini memiliki dimensi 80 kolom dan T baris, di mana T merujuk pada panjang waktu atau urutan data yang dapat bervariasi. Langkah pertama adalah penerapan lapisan konvolusi 1D dengan ukuran kernel 5 dan langkah (stride) 1 pada input. Setelah proses konvolusi, fungsi aktivasi ReLU digunakan untuk memberikan non-linearitas pada data, diikuti dengan penerapan Batch Normalization (BN) untuk menstabilkan data dan mempercepat proses pelatihan.
@@ -131,7 +134,6 @@ Kemudian, **Attentive Stat Pooling** diterapkan untuk menggabungkan fitur berdas
 Model ini dilanjutkan dengan lapisan **Fully Connected (FC)** yang menghasilkan output dari fitur yang telah diproses, diikuti dengan Batch Normalization untuk meningkatkan stabilitas dan kualitas pelatihan. Setelah itu, digunakan teknik **AAM-Softmax** untuk klasifikasi, yang memodelkan distribusi kelas dalam ruang fitur untuk menghasilkan prediksi kelas yang lebih akurat.
 
 Output akhir model berupa vektor berukuran **S × 1**, yang berisi hasil prediksi dari model, baik untuk klasifikasi maupun regresi. Model ini menggabungkan berbagai teknik untuk memproses data urutan dan menghasilkan output yang tepat sesuai dengan tugas yang diinginkan.
-
 
 [6]: https://www.isca-archive.org/interspeech_2020/desplanques20_interspeech.pdf 
 
